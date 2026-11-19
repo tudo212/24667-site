@@ -1,0 +1,276 @@
+/* ==========================================================================
+   24667 · v4 设计层
+   按 landing-page-design 的规则重写：字号/间距只取 Tailwind 档位、
+   卡片四边描边、悬浮胶囊导航、统一缓动曲线、标题限宽 680。
+   覆盖 site.css，不删旧规则，方便回退。
+   ========================================================================== */
+
+:root{
+  /* spacing: 只用这套档位 */
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:24px;
+  --sp-6:32px; --sp-7:40px; --sp-8:48px; --sp-9:64px;
+  --sp-10:80px; --sp-11:96px;
+
+  /* type scale: Tailwind 档位 */
+  --t-12:12px; --t-14:14px; --t-16:16px; --t-18:18px; --t-20:20px;
+  --t-24:24px; --t-30:30px; --t-36:36px; --t-48:48px; --t-60:60px;
+  --t-72:72px; --t-96:96px;
+
+  /* motion */
+  --ease:cubic-bezier(.22,1,.36,1);
+  --dur-fast:300ms;
+  --dur:500ms;
+  --dur-reveal:700ms;
+
+  --head:88px;
+  --gutter:var(--sp-6);
+  --shadow-float:0 10px 40px -18px rgba(20,23,26,.28);
+}
+
+@media (max-width:720px){
+  :root{--head:76px;--gutter:var(--sp-5)}
+}
+
+html{scroll-padding-top:calc(var(--head) + var(--sp-4))}
+
+body{padding-top:var(--head)}
+
+.wrap{max-width:1160px;padding-left:var(--gutter);padding-right:var(--gutter)}
+
+/* ---------- 导航：悬浮胶囊 ---------- */
+
+.site-head{
+  position:fixed;top:var(--sp-4);left:0;right:0;z-index:60;
+  background:transparent;border:0;backdrop-filter:none;
+}
+.site-head .wrap{
+  height:56px;
+  display:flex;align-items:center;gap:var(--sp-4);
+  padding:0 var(--sp-2) 0 var(--sp-4);
+  background:rgba(255,255,255,.86);
+  -webkit-backdrop-filter:blur(16px) saturate(180%);
+  backdrop-filter:blur(16px) saturate(180%);
+  border:1px solid var(--line);
+  border-radius:9999px;
+  box-shadow:var(--shadow-float);
+  transition:box-shadow var(--dur-fast) var(--ease),background-color var(--dur-fast) var(--ease);
+}
+.site-head.is-scrolled .wrap{background:rgba(255,255,255,.95);box-shadow:0 14px 44px -20px rgba(20,23,26,.4)}
+
+.brand{gap:var(--sp-3)}
+.brand-no{font-size:var(--t-20)}
+.brand-name{font-size:var(--t-12)}
+
+.nav{gap:0;margin-left:auto;overflow:visible}
+.nav a{
+  padding:var(--sp-2) var(--sp-3);
+  font-size:var(--t-14);line-height:1.2;
+  border-bottom:0;border-radius:9999px;
+  transition:background-color var(--dur-fast) var(--ease),color var(--dur-fast) var(--ease);
+}
+.nav a::after{display:none}
+.nav a:hover{background:rgba(20,23,26,.05);color:var(--ink)}
+.nav a[aria-current="page"]{background:var(--ink);color:#fff;border:0}
+.nav a[aria-current="page"]:hover{background:var(--ink);color:#fff}
+
+.lang-switch{
+  height:32px;padding:0 var(--sp-3);margin-left:var(--sp-2);
+  border-radius:9999px;font-size:var(--t-12);
+  border:1px solid var(--line);
+}
+
+@media (max-width:980px){
+  .nav a{padding:var(--sp-2) var(--sp-2);font-size:var(--t-12)}
+}
+@media (max-width:720px){
+  .site-head{top:var(--sp-2)}
+  .site-head .wrap{height:48px;padding:0 var(--sp-3);gap:var(--sp-2);overflow:hidden;flex-wrap:nowrap}
+  .brand-name{display:none}
+  .brand-no{font-size:var(--t-16);flex:0 0 auto}
+  .nav{min-width:0;flex:1 1 auto;margin-left:var(--sp-2)}
+  .nav{overflow-x:auto;overflow-y:hidden;scrollbar-width:none;white-space:nowrap}
+  .nav::-webkit-scrollbar{display:none}
+  .nav a{flex:0 0 auto;padding:var(--sp-1) var(--sp-2);font-size:var(--t-12)}
+  .lang-switch{height:28px;padding:0 var(--sp-2)}
+}
+
+/* ---------- 节奏 ---------- */
+
+.sec{padding:var(--sp-11) 0}
+@media (max-width:720px){.sec{padding:var(--sp-9) 0}}
+
+.page-head{padding:var(--sp-9) 0 var(--sp-8)}
+@media (max-width:720px){.page-head{padding:var(--sp-8) 0 var(--sp-6)}}
+
+.sec h2{font-size:var(--t-48);letter-spacing:-.03em;line-height:1.1}
+.page-head h1{font-size:var(--t-60);letter-spacing:-.035em;line-height:1.05}
+@media (max-width:980px){
+  .sec h2{font-size:var(--t-36)}
+  .page-head h1{font-size:var(--t-48)}
+}
+@media (max-width:720px){
+  .sec h2{font-size:var(--t-30)}
+  .page-head h1{font-size:var(--t-36)}
+}
+
+.eyebrow{font-size:var(--t-12)}
+
+/* ---------- 首屏 ---------- */
+
+.cover-full{min-height:calc(100vh - var(--head));padding:var(--sp-9) 0 var(--sp-8)}
+.cover-eyebrow{font-size:var(--t-12);letter-spacing:.18em}
+.cover-title{
+  font-size:var(--t-96);line-height:.88;letter-spacing:-.05em;
+  max-width:680px;
+}
+.cover-title span:first-child{
+  background:linear-gradient(90deg,#14171A 0%,#6E7681 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.cover-brand{font-size:var(--t-24);letter-spacing:.02em}
+.cover-sub{font-size:var(--t-16)}
+.cover-lead{font-size:var(--t-18);line-height:1.7;max-width:680px}
+.cover-actions{gap:var(--sp-3)}
+.cover-grid{gap:var(--sp-9)}
+
+@media (max-width:980px){
+  .cover-title{font-size:var(--t-72)}
+  .cover-brand{font-size:var(--t-20)}
+  .cover-lead{font-size:var(--t-16)}
+}
+@media (max-width:720px){
+  .cover-full{min-height:0;padding:var(--sp-8) 0 var(--sp-7)}
+  .cover-title{font-size:var(--t-48)}
+  .cover-brand{font-size:var(--t-18)}
+  .cover-grid{gap:var(--sp-7)}
+}
+
+/* ---------- 按钮 ---------- */
+
+.btn{
+  height:auto;min-height:40px;
+  padding:var(--sp-2) var(--sp-3);
+  font-size:var(--t-14);font-weight:600;letter-spacing:0;
+  border-radius:0;
+  transition:background-color var(--dur-fast) var(--ease),
+             color var(--dur-fast) var(--ease),
+             border-color var(--dur-fast) var(--ease),
+             transform var(--dur-fast) var(--ease);
+}
+.btn:active{transform:translateY(1px)}
+.btn .arw{transition:transform var(--dur-fast) var(--ease)}
+.btn:hover .arw{transform:translateX(3px)}
+
+/* ---------- 卡片：四边描边，不再用折叠边线 ---------- */
+
+.cards{border:0;gap:var(--sp-4);grid-auto-rows:1fr}
+.card{border:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.card img{border-bottom:0;border-right:0}
+.card .card-body{padding:var(--sp-5)}
+.card .idx{font-size:var(--t-12)}
+.card h3{font-size:var(--t-20);line-height:1.35}
+.card p{font-size:var(--t-14);line-height:1.65}
+.card-link{font-size:var(--t-14)}
+
+@media (hover:hover){
+  .card:hover{border-color:#CBD2D9}
+  .card:hover img{transform:scale(1.02)}
+}
+
+/* 价值卡也走同一套边线 */
+.value-card{border:1px solid var(--line);padding:var(--sp-5)}
+.value-en{font-size:var(--t-12)}
+.value-card h2{font-size:var(--t-20);margin-top:var(--sp-2)}
+.value-card p{font-size:var(--t-14);line-height:1.7;margin-top:var(--sp-2)}
+
+/* ---------- 表格 ---------- */
+
+th{font-size:var(--t-12);letter-spacing:.06em;padding-bottom:var(--sp-3)}
+td{font-size:var(--t-14);padding:var(--sp-3) var(--sp-4) var(--sp-3) 0}
+table{min-width:0}
+
+/* ---------- 时间线 / 日志 / 分割 ---------- */
+
+.tl-ver{font-size:var(--t-12)}
+.tl-name{font-size:var(--t-18)}
+.tl-item p{font-size:var(--t-14);line-height:1.65}
+.split{gap:var(--sp-9)}
+.split h3{font-size:var(--t-30);letter-spacing:-.02em}
+.split p,.lede{font-size:var(--t-16);line-height:1.75}
+.facts li{font-size:var(--t-14);padding:var(--sp-3) 0}
+.flow li{font-size:var(--t-14)}
+.log p{font-size:var(--t-14)}
+.log .when,.log .who{font-size:var(--t-12)}
+
+/* ---------- 赛季行 / 图纸卡 ---------- */
+
+.season-row{gap:var(--sp-8);padding:var(--sp-8) 0}
+.season-year{font-size:var(--t-12)}
+.season-meta h2{font-size:var(--t-30)}
+.season-meta p{font-size:var(--t-14)}
+.season-strip{gap:var(--sp-3)}
+.season-strip figcaption{font-size:var(--t-12)}
+.dl-tab{font-size:var(--t-12);padding:var(--sp-3) 0}
+.dl-cap{font-size:var(--t-12);padding:var(--sp-2) var(--sp-3)}
+.meet summary{padding:var(--sp-5) 0}
+.meet-name{font-size:var(--t-18)}
+.meet-meta{font-size:var(--t-12)}
+.meet-note{font-size:var(--t-14)}
+
+/* ---------- 数字条 ---------- */
+
+.stats .wrap{padding:var(--sp-5) var(--gutter)}
+.stat .n{font-size:var(--t-30)}
+.stat .k{font-size:var(--t-12)}
+.head-stats{font-size:var(--t-14);gap:var(--sp-3) var(--sp-7);margin-top:var(--sp-5);padding-top:var(--sp-4)}
+.head-stats b{font-size:var(--t-20)}
+
+/* ---------- 页脚 ---------- */
+
+.site-foot{padding:var(--sp-10) 0 var(--sp-6)}
+.site-foot li{font-size:var(--t-14)}
+.foot-h{font-size:var(--t-12)}
+.foot-bottom{font-size:var(--t-12);margin-top:var(--sp-8);padding-top:var(--sp-5)}
+.foot-links{columns:2;column-gap:var(--sp-5)}
+
+@media (max-width:720px){
+  .site-foot{padding:var(--sp-8) 0 var(--sp-5)}
+  .foot-grid{gap:var(--sp-7)}
+}
+
+/* ---------- 标签式大字（tagline reveal） ---------- */
+
+.tagline{padding:var(--sp-11) 0;border-top:1px solid var(--line)}
+.tagline p{
+  margin:0;max-width:900px;
+  font-size:var(--t-60);line-height:1.15;letter-spacing:-.03em;font-weight:700;
+}
+.tagline .w{color:inherit}
+@media (max-width:980px){.tagline p{font-size:var(--t-36)}}
+@media (max-width:720px){.tagline p{font-size:var(--t-30)}}
+
+/* ---------- 动效兜底 ---------- */
+
+@media (prefers-reduced-motion:reduce){
+  .card img,.btn .arw{transition:none}
+}
+
+/* ---------- 移动端导航：胶囊改成两行，仍保持圆角与毛玻璃 ---------- */
+
+@media (max-width:980px){
+  :root{--head:104px}
+  .site-head{top:var(--sp-2)}
+  .site-head .wrap{
+    height:auto;min-height:56px;flex-wrap:wrap;row-gap:var(--sp-1);
+    padding:var(--sp-2) var(--sp-3);border-radius:var(--sp-5);overflow:hidden;
+  }
+  .brand{flex:1 0 auto;margin-right:auto}
+  .brand-name{display:none}
+  .lang-switch{order:2;margin-left:0;height:28px;padding:0 var(--sp-2);flex:0 0 auto}
+  .nav{
+    order:3;flex:1 0 100%;margin-left:0;min-width:0;display:flex;
+    overflow-x:auto;overflow-y:hidden;white-space:nowrap;scrollbar-width:none;
+  }
+  .nav::-webkit-scrollbar{display:none}
+  .nav a{flex:0 0 auto;padding:var(--sp-1) var(--sp-2);font-size:var(--t-12)}
+}
