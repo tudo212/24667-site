@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tudo212.github.io/24667-site/sitemap.xml

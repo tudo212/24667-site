@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>开源图纸｜24667 思无涯</title>
+<meta name="description" content="24667 两个赛季的 SolidWorks 装配体，整理好后开放下载。">
+<meta property="og:title" content="开源图纸｜24667 思无涯">
+<meta property="og:description" content="24667 两个赛季的 SolidWorks 装配体，整理好后开放下载。">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#C8102E">
+<link rel="alternate" hreflang="en" href="../en/downloads/index.html">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/site.css">
+<script>document.documentElement.classList.add("js")</script>
+</head>
+<body>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="../index.html">
+      <span class="brand-no">24667</span><span class="brand-sep"></span>
+      <span class="brand-name"><b>思无涯</b> Thinking Unlimited #3</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+        <a href="../index.html">首页</a>
+        <a href="../about/index.html">关于我们</a>
+        <a href="../seasons/2027/index.html">当前赛季</a>
+        <a href="../seasons/index.html">赛季档案</a>
+        <a href="../resources/index.html">资源分享</a>
+        <a href="../downloads/index.html" aria-current="page">开源图纸</a>
+        <a href="../sponsor/index.html">支持我们</a>
+    </nav>
+    <a class="lang-switch" href="../en/downloads/index.html" hreflang="en">EN</a>
+  </div>
+</header>
+
+<main>
+
+<div class="page-head">
+  <div class="wrap">
+    <div class="eyebrow">开源图纸</div>
+    <h1>两个赛季，四版设计</h1>
+  </div>
+</div>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="cards two">
+
+      <article class="card" data-version="V1.0">
+        <div class="dl-media">
+          <img id="bio-img" src="../assets/img/v1.jpg" alt="BIOBUZZ V1.0 云台发射设计图">
+          <div class="dl-tabs">
+            <button class="dl-tab is-active" type="button" aria-pressed="true"
+                    data-img="bio-img" data-src="../assets/img/v1.jpg"
+                    data-cap="V1.0 云台发射 · 已淘汰">V1.0</button>
+            <button class="dl-tab" type="button" aria-pressed="false"
+                    data-img="bio-img" data-src="../assets/img/v2.jpg"
+                    data-cap="V2.0 双通道 · 下旋 · 已淘汰">V2.0</button>
+          </div>
+          <p class="dl-cap" id="bio-cap">V1.0 云台发射 · 已淘汰</p>
+        </div>
+        <div class="card-body">
+          <div class="idx">2026–2027 · BIOBUZZ</div>
+          <h3>旧版设计，两版</h3>
+          <ul class="points">
+            <li>V1.0：想同时做分拣和云台自瞄，空间放不下</li>
+            <li>V2.0：双通道跑通了，下旋球进框又弹出来</li>
+          </ul>
+          <button class="btn btn-ghost mt-16" type="button" data-download="2026–2027 BIOBUZZ">下载 SolidWorks <span class="arw">↓</span></button>
+        </div>
+      </article>
+
+      <article class="card" data-version="V1.0">
+        <div class="dl-media">
+          <img id="dec-img" src="../assets/img/decode-v1.jpg" alt="DECODE V1.0 机器人设计图">
+          <div class="dl-tabs">
+            <button class="dl-tab is-active" type="button" aria-pressed="true"
+                    data-img="dec-img" data-src="../assets/img/decode-v1.jpg"
+                    data-cap="V1.0 固定仰角 · 已淘汰">V1.0</button>
+            <button class="dl-tab" type="button" aria-pressed="false"
+                    data-img="dec-img" data-src="../assets/img/decode-v2.jpg"
+                    data-cap="V2.0 可调仰角 · 赛季已结束">V2.0</button>
+          </div>
+          <p class="dl-cap" id="dec-cap">V1.0 固定仰角 · 已淘汰</p>
+        </div>
+        <div class="card-body">
+          <div class="idx">2025–2026 · DECODE</div>
+          <h3>第一台车，两版都开源</h3>
+          <ul class="points">
+            <li>V1.0：单飞轮固定仰角，只能近投</li>
+            <li>V2.0：硬飞轮、可调仰角、Limelight 自瞄</li>
+          </ul>
+          <button class="btn btn-ghost mt-16" type="button" data-download="2025–2026 DECODE">下载 SolidWorks <span class="arw">↓</span></button>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="notice mt-28">
+      <b>文件还没上传</b>　两个赛季的装配体正在整理成压缩包，上传后这一页会直接给出下载链接；现在点按钮只会弹说明。现役的 BIOBUZZ V3.0 结构、程序代码和 CAD 源文件不公开，可以现场演示。
+    </div>
+  </div>
+</section>
+
+<dialog class="dlg" id="dlg">
+  <h2>下载 SolidWorks 文件</h2>
+  <p id="dlg-text"></p>
+  <div class="dlg-actions">
+    <button class="btn btn-ghost" type="button" data-close>取消</button>
+    <button class="btn btn-primary" type="button" disabled>下载（待上传）</button>
+  </div>
+</dialog>
+
+<script>
+  (function () {
+    document.querySelectorAll('.dl-tab').forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        var img = document.getElementById(tab.getAttribute('data-img'));
+        if (!img) return;
+        img.src = tab.getAttribute('data-src');
+        var cap = document.getElementById(tab.getAttribute('data-img').replace('-img', '-cap'));
+        if (cap) cap.textContent = tab.getAttribute('data-cap');
+        var card = tab.closest('.card');
+        if (card) card.setAttribute('data-version', tab.textContent.trim());
+        tab.parentNode.querySelectorAll('.dl-tab').forEach(function (other) {
+          var on = other === tab;
+          other.classList.toggle('is-active', on);
+          other.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+      });
+    });
+
+    var dlg = document.getElementById('dlg');
+    var txt = document.getElementById('dlg-text');
+    document.querySelectorAll('[data-download]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var card = btn.closest('.card');
+        var ver = card ? card.getAttribute('data-version') : '';
+        txt.textContent = btn.getAttribute('data-download') + ' ' + ver +
+          ' 的装配体还在整理，上传后会在这里直接下载。';
+        if (dlg.showModal) { dlg.showModal(); } else { dlg.setAttribute('open', ''); }
+      });
+    });
+    function close() {
+      if (dlg.close) { dlg.close(); } else { dlg.removeAttribute('open'); }
+    }
+    dlg.addEventListener('click', function (e) {
+      if (e.target === dlg || e.target.hasAttribute('data-close')) { close(); }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && dlg.open) { close(); }
+    });
+  })();
+</script>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="fn">24667 思无涯 Thinking Unlimited #3</div>
+        <p>重庆市江北巴川量子学校 · 巴川量子机器人社团<br>FIRST TECH CHALLENGE 2026–2027 赛季</p>
+      </div>
+      <div>
+        <div class="foot-h">栏目</div>
+        <ul class="foot-links">
+          <li><a href="../about/index.html">关于我们</a></li>
+          <li><a href="../seasons/2027/index.html">当前赛季</a></li>
+          <li><a href="../seasons/index.html">赛季档案</a></li>
+          <li><a href="../resources/index.html">资源分享</a></li>
+          <li><a href="../downloads/index.html">开源图纸</a></li>
+          <li><a href="../sponsor/index.html">支持我们</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="foot-h">联系</div>
+        <ul>
+          <li>教练 吴天兵 · 李嘉豪 · 刘保林</li>
+          <li><a href="mailto:17708321963@163.com">邮箱 17708321963@163.com</a></li>
+          <li><a href="../seasons/2027/index.html">2026–27 赛季</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 24667 思无涯 · 本站人物照片仅使用团体照</span>
+      <span class="draft">预览版 v3 · 2026-11-19　FIRST® 与 FIRST TECH CHALLENGE® 为 FIRST 注册商标，本站与 FIRST 无隶属关系。</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/site.js" defer></script>
+</body>
+</html>
